@@ -10,7 +10,7 @@ namespace TerrainSystem
     {
         [Header("Brush Settings")]
         [Tooltip("Brush size in pixels.")]
-        [Range(2, 50)]
+        [Range(2, 100)]
         [SerializeField] private int brushSize = 16;
 
         [Tooltip("Brush strength applied per second.")]
@@ -53,7 +53,7 @@ namespace TerrainSystem
             if (Mathf.Abs(input.y) > 0.01f)
             {
                 brushSize += (int)input.y;
-                brushSize = Mathf.Clamp(brushSize, 2, 50);
+                brushSize = Mathf.Clamp(brushSize, 2, 100);
             }
         }
 

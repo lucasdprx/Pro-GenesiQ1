@@ -880,7 +880,7 @@ MonoBehaviour:
   brushSize: 25
   strength: 0.1
   lowerKey: 304
-  projector: {fileID: 0}
+  projector: {fileID: 2012421599}
 --- !u!154 &1347031963
 TerrainCollider:
   m_ObjectHideFlags: 0
