@@ -16,13 +16,7 @@ public class CameraController : MonoBehaviour
         cameraPivotTransform = transform;
         cameraTransform = Camera.main?.transform;
         InputManager.OnMoveInput += SetMoveInput;
-        InputManager.OnScrollInput += ScrollCamera;
         InputManager.OnLookInput += SetLookInput;
-    }
-
-    private void ScrollCamera(Vector2 input)
-    {
-        cameraPivotTransform.position += cameraPivotTransform.forward * input.y * scrollSpeed;
     }
 
     private void Update()
