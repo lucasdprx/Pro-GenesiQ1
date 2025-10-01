@@ -3,7 +3,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float scrollSpeed = 5f;
     [SerializeField] private float lookSpeed = 5f;
     
     private Vector2 moveInput;
