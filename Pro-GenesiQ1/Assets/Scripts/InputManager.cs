@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     public static event Action OnMouseLeftClickReleased;
     public static event Action OnMouseRightClickPressed;
     public static event Action OnMouseRightClickReleased;
+    public static event Action OnLeftShiftPressed;
+    public static event Action OnLeftShiftReleased;
     
     private bool isPointerOverGameObject;
 
@@ -56,6 +58,17 @@ public class InputManager : MonoBehaviour
         else if (ctx.canceled)
         {
             OnMouseRightClickReleased?.Invoke();
+        }
+    }
+    public void LeftShiftInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            OnLeftShiftPressed?.Invoke();
+        }
+        else if (ctx.canceled)
+        {
+            OnLeftShiftReleased?.Invoke();
         }
     }
 }

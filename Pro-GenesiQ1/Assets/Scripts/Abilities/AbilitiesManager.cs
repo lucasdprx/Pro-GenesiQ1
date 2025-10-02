@@ -29,6 +29,13 @@ public class AbilitiesManager : MonoBehaviour
         }
     }
     
+    public void ClearAbility()
+    {
+        if (currentAbility)
+            currentAbility.enabled = false;
+        currentAbility = null;
+    }
+    
     private void InputManagerOnMouseLeftClickPressed()
     {
         inputLeftCLick = true;

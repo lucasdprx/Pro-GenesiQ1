@@ -13,10 +13,10 @@ public class TerrainPainter : Ability
 
     [Range(0.01f, 1f)]
     [SerializeField] private float strength = 0.01f;
-    [SerializeField] private KeyCode lowerKey = KeyCode.LeftShift;
 
     private TerrainData terrainData;
     private int heightResolution;
+    private bool leftShift;
 
     public static event Action OnTerrainModified;
 
@@ -28,6 +28,8 @@ public class TerrainPainter : Ability
         heightResolution = terrainData.heightmapResolution;
 
         terrain.GetComponent<TerrainCollider>().terrainData = terrainData;
+        InputManager.OnLeftShiftPressed += () => leftShift = true;
+        InputManager.OnLeftShiftReleased += () => leftShift = false;
     }
 
 
@@ -85,7 +87,7 @@ public class TerrainPainter : Ability
                 float falloff = Mathf.Clamp01(1f - (dx * dx + dz * dz));
                 float delta = strength * falloff * Time.deltaTime;
 
-                if (Input.GetKey(lowerKey)) delta = -delta;
+                if (leftShift) delta = -delta;
 
                 heights[z, x] = Mathf.Clamp01(heights[z, x] + delta);
             }
@@ -103,7 +105,8 @@ public class TerrainPainter : Ability
     private void OnDisable()
     {
         InputManager.OnScrollInput -= ScrollSize;
-        projector.gameObject.SetActive(false);
+        if (projector)
+            projector.gameObject.SetActive(false);
     }
     private void OnEnable()
     {

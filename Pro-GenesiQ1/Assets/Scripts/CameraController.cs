@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private float speedMultiplier = 2f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float lookSpeed = 5f;
     
@@ -16,6 +17,8 @@ public class CameraController : MonoBehaviour
         cameraTransform = Camera.main?.transform;
         InputManager.OnMoveInput += SetMoveInput;
         InputManager.OnLookInput += SetLookInput;
+        InputManager.OnLeftShiftPressed += () => moveSpeed *= speedMultiplier;
+        InputManager.OnLeftShiftReleased += () => moveSpeed /= speedMultiplier;
     }
 
     private void Update()
