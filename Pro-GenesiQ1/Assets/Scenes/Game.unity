@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55b1c379de740d4b98a39bab1840944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CycleJourney
-  speedCycle: 50
+  speedCycle: 75
   dayTime: 1
 --- !u!1 &365304841
 GameObject:
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e857019a52e404448618594881d5d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  speedMultiplier: 2
+  speedMultiplier: 4
   moveSpeed: 50
   lookSpeed: 10
 --- !u!1 &858151314

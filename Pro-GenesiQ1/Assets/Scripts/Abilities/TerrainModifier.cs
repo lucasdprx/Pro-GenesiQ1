@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
-public class TerrainPainter : Ability
+public class TerrainModifier : Ability
 {
     [Header("References")]
     [SerializeField] private Terrain terrain;

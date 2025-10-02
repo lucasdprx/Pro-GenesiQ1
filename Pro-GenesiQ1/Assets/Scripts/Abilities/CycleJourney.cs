@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CycleJourney : MonoBehaviour
@@ -17,7 +16,6 @@ public class CycleJourney : MonoBehaviour
 
     private void Update()
     {
-        print(sun.eulerAngles);
         if (!isCycling) return;
 
         float rotateAmount = (dayTime ? 1 : -1) * speedCycle * Time.deltaTime;

@@ -7,7 +7,7 @@ public class ObjectPosition : MonoBehaviour
     private Transform objectTransform;
     private void Awake()
     {
-        TerrainPainter.OnTerrainModified += RefreshPosition;
+        TerrainModifier.OnTerrainModified += RefreshPosition;
         objectTransform = transform;
     }
 
