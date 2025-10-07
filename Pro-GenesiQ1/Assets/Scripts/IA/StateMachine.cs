@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class StateMachine : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    [HideInInspector] public NavMeshAgent agent;
     private IState currentState;
     private IdleState idleState;
     private bool isSelected;

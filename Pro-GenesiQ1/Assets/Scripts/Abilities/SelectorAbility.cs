@@ -1,18 +1,38 @@
+using UnityEngine;
+
 public class SelectorAbility : Ability
 {
-    private StateMachine currentHuman;
+    private GameObject currentSelected;
     public override void Capacity()
     {
-        base.Capacity();
-        if (hit.transform != null && hit.transform.TryGetComponent(out StateMachine human))
+        if (!hit.transform) return;
+        
+        TerrainCollider terrainCollider = hit.transform.GetComponent<TerrainCollider>();
+
+        
+        StateMachine human = currentSelected?.GetComponent<StateMachine>();
+        if (human)
         {
-            currentHuman = human;
-            currentHuman.HandleSelection();
+            human.agent.SetDestination(hit.point);
+            currentSelected = null;
+            return;
         }
+        
+        if (!terrainCollider)
+            currentSelected = hit.transform.gameObject;
     }
 
     private void OnDisable()
     {
-        currentHuman = null;
+        currentSelected = null;
+    }
+    
+    public void DeleteSelected()
+    {
+        if (currentSelected != null)
+        {
+            Destroy(currentSelected);
+            currentSelected = null;
+        }
     }
 }
