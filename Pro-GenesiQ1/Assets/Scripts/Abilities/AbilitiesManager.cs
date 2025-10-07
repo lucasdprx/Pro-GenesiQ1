@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AbilitiesManager : MonoBehaviour
 {
+    [SerializeField] private Ability defaultAbility;
+    
     private Ability currentAbility;
     private bool inputLeftCLick;
 
@@ -9,10 +11,14 @@ public class AbilitiesManager : MonoBehaviour
     {
         InputManager.OnMouseLeftClickPressed += InputManagerOnMouseLeftClickPressed;
         InputManager.OnMouseLeftClickReleased += InputManagerOnMouseLeftClickRelease;
+        if (defaultAbility)
+            ChangeAbility(defaultAbility);
     }
 
     public void ChangeAbility(Ability newAbility)
     {
+        if (newAbility == currentAbility) return;
+        
         if (currentAbility)
             currentAbility.enabled = false;
         newAbility.enabled = true;

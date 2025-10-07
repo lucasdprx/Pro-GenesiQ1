@@ -1,0 +1,36 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+public class StateMachine : MonoBehaviour
+{
+    private NavMeshAgent agent;
+    private IState currentState;
+    private IdleState idleState;
+    private bool isSelected;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        idleState = new IdleState(agent);
+        ChangeState(idleState);
+    }
+
+    private void Update()
+    {
+        currentState?.OnUpdate();
+    }
+
+    private void ChangeState(IState newState)
+    {
+        if (newState == currentState) return;
+
+        currentState?.OnExit();
+        currentState = newState;
+        currentState?.OnEnter();
+    }
+    
+    public void HandleSelection()
+    {
+        isSelected = true;
+    }
+}

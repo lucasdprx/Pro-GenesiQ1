@@ -14,7 +14,7 @@ public class TerrainModifier : Ability
     [Range(0.01f, 1f)]
     [SerializeField] private float strength = 0.01f;
 
-    private TerrainData terrainData;
+    public TerrainData terrainData;
     private int heightResolution;
     private bool leftShift;
 
