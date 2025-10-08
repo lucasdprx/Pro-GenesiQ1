@@ -6,9 +6,8 @@ public class StateMachine : MonoBehaviour
     [HideInInspector] public NavMeshAgent agent;
     private IState currentState;
     private IdleState idleState;
-    private bool isSelected;
 
-    private void Awake()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         idleState = new IdleState(agent);
@@ -27,10 +26,5 @@ public class StateMachine : MonoBehaviour
         currentState?.OnExit();
         currentState = newState;
         currentState?.OnEnter();
-    }
-    
-    public void HandleSelection()
-    {
-        isSelected = true;
     }
 }

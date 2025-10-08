@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GameObjectPainter : Ability
@@ -7,12 +6,17 @@ public class GameObjectPainter : Ability
     [SerializeField] private GameObject objectPainter;
     [SerializeField] private GameObject objectPainterTransient;
     
+    public bool rotateWithNormal;
+    
     private GameObject transientObject;
 
     protected override void Awake()
     {
         base.Awake();
-        transientObject = Instantiate(objectPainterTransient);
+        if (objectPainterTransient is not null)
+        {
+            transientObject = Instantiate(objectPainterTransient);
+        }
     }
 
     protected override void Update()
@@ -20,7 +24,8 @@ public class GameObjectPainter : Ability
         base.Update();
         if (transientObject is null || hit.collider is null) return;
         transientObject.transform.position = hit.point;
-        transientObject.transform.up = hit.normal;
+        if (rotateWithNormal)
+            transientObject.transform.up = hit.normal;
     }
 
     public override void Capacity()
@@ -28,7 +33,8 @@ public class GameObjectPainter : Ability
         if (objectPainter is null || !hit.collider) return;
         
         GameObject newObject = Instantiate(objectPainter, hit.point, Quaternion.identity);
-        newObject.transform.up = hit.normal;
+        if (rotateWithNormal)
+            newObject.transform.up = hit.normal;
     }
 
     private void OnDisable()

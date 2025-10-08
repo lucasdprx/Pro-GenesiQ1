@@ -18,13 +18,14 @@ public class TerrainModifier : Ability
     private int heightResolution;
     private bool leftShift;
 
-    public static event Action OnTerrainModified;
+    public static event Action<Vector3, float> OnTerrainModified;
 
     protected override void Awake()
     {
         base.Awake();
         terrainData = Instantiate(terrain.terrainData);
         terrain.terrainData = terrainData;
+        terrain.GetComponent<TerrainCollider>().terrainData = terrainData;
         heightResolution = terrainData.heightmapResolution;
 
         terrain.GetComponent<TerrainCollider>().terrainData = terrainData;
@@ -57,6 +58,8 @@ public class TerrainModifier : Ability
     }
     public override void Capacity()
     {
+        if (!hit.collider) return;
+        
         Vector3 localPos = hit.point - terrain.transform.position;
 
         float normX = localPos.x / terrainData.size.x;
@@ -94,7 +97,7 @@ public class TerrainModifier : Ability
         }
 
         terrainData.SetHeights(xStart, zStart, heights);
-        OnTerrainModified?.Invoke();
+        OnTerrainModified?.Invoke(hit.point, brushSize * terrainData.size.x / heightResolution / 2f);
     }
 
     private void OnDestroy()

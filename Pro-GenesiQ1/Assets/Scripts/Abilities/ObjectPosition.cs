@@ -11,7 +11,7 @@ public class ObjectPosition : MonoBehaviour
         objectTransform = transform;
     }
 
-    private void RefreshPosition()
+    private void RefreshPosition(Vector3 point, float radius)
     {
         if (Physics.Raycast(startPoint.position, -objectTransform.up, out RaycastHit hit,
                 Mathf.Infinity,LayerMask.GetMask("Terrain")))
