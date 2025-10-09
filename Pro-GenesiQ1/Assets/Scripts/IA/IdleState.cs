@@ -5,6 +5,7 @@ public class IdleState : IState
 {
     private readonly NavMeshAgent agent;
     private float idleTime;
+    public bool IsComplete { get; set; }
     
     public IdleState(NavMeshAgent agent)
     {
@@ -33,7 +34,8 @@ public class IdleState : IState
     {
         
     }
-    
+
+
     private Vector3 GetRandomVector(float scale)
     {
         return new Vector3(Random.Range(-scale, scale), 0, Random.Range(-scale, scale));

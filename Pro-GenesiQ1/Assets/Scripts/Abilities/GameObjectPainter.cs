@@ -5,6 +5,8 @@ public class GameObjectPainter : Ability
     [Header("References")]
     [SerializeField] private GameObject objectPainter;
     [SerializeField] private GameObject objectPainterTransient;
+    [SerializeField] private ResourceType resourceType;
+    [SerializeField] private int resourceCost = 1;
     
     public bool rotateWithNormal;
     
@@ -31,6 +33,8 @@ public class GameObjectPainter : Ability
     public override void Capacity()
     {
         if (objectPainter is null || !hit.collider) return;
+
+        if (!PlayerResources.Instance.SpendResource(resourceType, resourceCost)) return;
         
         GameObject newObject = Instantiate(objectPainter, hit.point, Quaternion.identity);
         if (rotateWithNormal)
@@ -39,7 +43,8 @@ public class GameObjectPainter : Ability
 
     private void OnDisable()
     {
-        transientObject.SetActive(false);
+        if (transientObject)
+            transientObject.SetActive(false);
     }
     private void OnEnable()
     {

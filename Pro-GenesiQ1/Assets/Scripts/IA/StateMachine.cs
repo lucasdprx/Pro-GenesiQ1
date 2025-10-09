@@ -17,9 +17,13 @@ public class StateMachine : MonoBehaviour
     private void Update()
     {
         currentState?.OnUpdate();
+        if (currentState is { IsComplete: true })
+        {
+            ChangeState(idleState);
+        }
     }
 
-    private void ChangeState(IState newState)
+    public void ChangeState(IState newState)
     {
         if (newState == currentState) return;
 

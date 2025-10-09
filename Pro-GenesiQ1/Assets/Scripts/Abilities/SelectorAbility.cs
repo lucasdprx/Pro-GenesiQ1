@@ -8,12 +8,19 @@ public class SelectorAbility : Ability
         if (!hit.transform) return;
         
         TerrainCollider terrainCollider = hit.transform.GetComponent<TerrainCollider>();
-
-        
+        CollectItem collectable = hit.transform.GetComponent<CollectItem>();
         StateMachine human = currentSelected?.GetComponent<StateMachine>();
+        
         if (human)
         {
-            human.agent.SetDestination(hit.point);
+            if (collectable)
+            {
+                human.ChangeState(new CollectState(collectable.transform, human.agent, collectable));
+            }
+            else
+            {
+                human.agent.SetDestination(hit.point);
+            }
             currentSelected = null;
             return;
         }

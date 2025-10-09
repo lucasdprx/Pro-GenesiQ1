@@ -3,4 +3,6 @@ public interface IState
     public void OnEnter();
     public void OnUpdate();
     public void OnExit();
+    
+    public bool IsComplete { get; set; }
 }

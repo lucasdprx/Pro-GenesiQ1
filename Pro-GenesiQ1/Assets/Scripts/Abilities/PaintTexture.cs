@@ -13,8 +13,7 @@ public class PaintTexture : Ability
 
     private void Start()
     {
-        terrainData = terrainModifier.terrainData;
-        terrain.terrainData = terrainData;
+        terrainData = terrain.terrainData;
     }
     
     public void SetTextureIndex(int index)
