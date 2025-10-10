@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class SelectorAbility : Ability
 {
     private GameObject currentSelected;
+    [SerializeField] private DecalProjector decalProjector;
     public override void Capacity()
     {
         if (!hit.transform) return;
@@ -22,20 +24,42 @@ public class SelectorAbility : Ability
                 human.ChangeState(human.idleState);
             }
             currentSelected = null;
+            if (decalProjector)
+            {
+                decalProjector.gameObject.SetActive(false);
+                decalProjector.transform.SetParent(null);
+            }
             return;
         }
-        
+
         if (!terrainCollider)
+        {
+            if (decalProjector)
+                decalProjector.gameObject.SetActive(true);
             currentSelected = hit.transform.gameObject;
+            decalProjector.transform.SetParent(currentSelected.transform);
+            decalProjector.transform.localPosition = Vector3.zero;
+            decalProjector.size = new Vector3(2, 2, 2);
+        }
     }
 
     private void OnDisable()
     {
         currentSelected = null;
+        if (decalProjector)
+        {
+            decalProjector.gameObject.SetActive(false);
+            decalProjector.transform.SetParent(null);
+        }
     }
     
     public void DeleteSelected()
     {
+        if (decalProjector)
+        {
+            decalProjector.gameObject.SetActive(false);
+            decalProjector.transform.SetParent(null);
+        }
         if (currentSelected != null)
         {
             Destroy(currentSelected);
