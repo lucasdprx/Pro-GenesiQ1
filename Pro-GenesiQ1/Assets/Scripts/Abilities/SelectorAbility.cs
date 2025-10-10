@@ -19,7 +19,7 @@ public class SelectorAbility : Ability
             }
             else
             {
-                human.agent.SetDestination(hit.point);
+                human.ChangeState(human.idleState);
             }
             currentSelected = null;
             return;

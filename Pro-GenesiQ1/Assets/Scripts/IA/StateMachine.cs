@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class StateMachine : MonoBehaviour
 {
-    [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public Rigidbody agent;
     private IState currentState;
-    private IdleState idleState;
+    [HideInInspector] public IdleState idleState;
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<Rigidbody>();
         idleState = new IdleState(agent);
         ChangeState(idleState);
     }

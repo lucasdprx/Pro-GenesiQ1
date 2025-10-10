@@ -23,14 +23,15 @@ public class TerrainModifier : Ability
     protected override void Awake()
     {
         base.Awake();
-        terrainData = Instantiate(terrain.terrainData);
-        terrain.terrainData = terrainData;
-        terrain.GetComponent<TerrainCollider>().terrainData = terrainData;
-        heightResolution = terrainData.heightmapResolution;
-
-        terrain.GetComponent<TerrainCollider>().terrainData = terrainData;
+        
         InputManager.OnLeftShiftPressed += () => leftShift = true;
         InputManager.OnLeftShiftReleased += () => leftShift = false;
+    }
+
+    private void Start()
+    {
+        terrainData = terrain.terrainData;
+        heightResolution = terrainData.heightmapResolution;
     }
 
 
