@@ -8,42 +8,26 @@ public class SelectorAbility : Ability
     public override void Capacity()
     {
         if (!hit.transform) return;
-        
-        TerrainCollider terrainCollider = hit.transform.GetComponent<TerrainCollider>();
-        CollectItem collectable = hit.transform.GetComponent<CollectItem>();
+
+        Transform hitTransform = hit.transform;
+        TerrainCollider terrainCollider = hitTransform.GetComponent<TerrainCollider>();
+        CollectItem collectable = hitTransform.GetComponent<CollectItem>();
         StateMachine human = currentSelected?.GetComponent<StateMachine>();
-        
+
         if (human)
         {
-            if (collectable)
-            {
-                human.ChangeState(new CollectState(collectable.transform, human.agent, collectable));
-            }
-            else
-            {
-                human.ChangeState(human.idleState);
-            }
-            currentSelected = null;
-            if (decalProjector)
-            {
-                decalProjector.gameObject.SetActive(false);
-                decalProjector.transform.SetParent(null);
-            }
+            human.ChangeState(collectable ? new CollectState(collectable.transform, human.agent, collectable) : human.idleState);
+            ResetSelection();
             return;
         }
 
         if (!terrainCollider)
         {
-            if (decalProjector)
-                decalProjector.gameObject.SetActive(true);
-            currentSelected = hit.transform.gameObject;
-            decalProjector.transform.SetParent(currentSelected.transform);
-            decalProjector.transform.localPosition = Vector3.zero;
-            decalProjector.size = new Vector3(2, 2, 2);
+            ActivateDecal(hitTransform.gameObject);
         }
     }
 
-    private void OnDisable()
+    private void ResetSelection()
     {
         currentSelected = null;
         if (decalProjector)
@@ -51,6 +35,24 @@ public class SelectorAbility : Ability
             decalProjector.gameObject.SetActive(false);
             decalProjector.transform.SetParent(null);
         }
+    }
+
+    private void ActivateDecal(GameObject target)
+    {
+        if (decalProjector)
+        {
+            decalProjector.gameObject.SetActive(true);
+            decalProjector.transform.SetParent(target.transform);
+            decalProjector.transform.localPosition = Vector3.zero;
+            decalProjector.transform.localRotation = Quaternion.identity;
+            decalProjector.size = new Vector3(2, 2, 2);
+        }
+        currentSelected = target;
+    }
+
+    private void OnDisable()
+    {
+        ResetSelection();
     }
     
     public void DeleteSelected()
