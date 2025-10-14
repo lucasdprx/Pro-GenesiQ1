@@ -29,7 +29,7 @@ public class StateMachine : MonoBehaviour
         if (currentState is HouseState) return;
         
         houseTimer += Time.deltaTime;
-        if (houseTimer >= 1)
+        if (houseTimer >= 2)
         {
             int size = Physics.OverlapSphereNonAlloc(transform.position, 15, results, 1 << LayerMask.NameToLayer("House"));
             if (size > 0)

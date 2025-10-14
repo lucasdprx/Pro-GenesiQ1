@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833dc0590fa5d2b4d82a8fc7297781d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectItem
-  resourceType: 1
+  resourceType: 2
   amount: 5
 --- !u!65 &7049828025741357157
 BoxCollider:

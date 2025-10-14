@@ -28,9 +28,9 @@ public class GameObjectPainter : Ability
         base.Update();
         if (transientObject is null || hit.collider is null) return;
         transientObject.transform.position = hit.point;
-        transientObject.transform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
         if (rotateWithNormal)
             transientObject.transform.up = hit.normal;
+        transientObject.transform.eulerAngles = new Vector3(transientObject.transform.eulerAngles.x, cameraTransform.eulerAngles.y, transientObject.transform.eulerAngles.z);
     }
 
     public override void Capacity()
@@ -40,9 +40,7 @@ public class GameObjectPainter : Ability
         if (!PlayerResources.Instance.SpendResource(resourceType, resourceCost)) return;
         
         GameObject newObject = Instantiate(objectPainter, hit.point, Quaternion.identity);
-        newObject.transform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
-        if (rotateWithNormal)
-            newObject.transform.up = hit.normal;
+        newObject.transform.eulerAngles = transientObject.transform.eulerAngles;
     }
 
     private void OnDisable()
