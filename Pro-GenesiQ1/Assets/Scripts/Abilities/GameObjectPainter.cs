@@ -11,10 +11,12 @@ public class GameObjectPainter : Ability
     public bool rotateWithNormal;
     
     private GameObject transientObject;
+    private Transform cameraTransform;
 
     protected override void Awake()
     {
         base.Awake();
+        cameraTransform = Camera.main?.transform;
         if (objectPainterTransient is not null)
         {
             transientObject = Instantiate(objectPainterTransient);
@@ -26,6 +28,7 @@ public class GameObjectPainter : Ability
         base.Update();
         if (transientObject is null || hit.collider is null) return;
         transientObject.transform.position = hit.point;
+        transientObject.transform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
         if (rotateWithNormal)
             transientObject.transform.up = hit.normal;
     }
@@ -37,6 +40,7 @@ public class GameObjectPainter : Ability
         if (!PlayerResources.Instance.SpendResource(resourceType, resourceCost)) return;
         
         GameObject newObject = Instantiate(objectPainter, hit.point, Quaternion.identity);
+        newObject.transform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
         if (rotateWithNormal)
             newObject.transform.up = hit.normal;
     }
