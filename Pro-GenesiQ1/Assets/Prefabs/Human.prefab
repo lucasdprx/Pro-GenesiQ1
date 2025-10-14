@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5786155421252051063}
   - component: {fileID: 6302823359641428710}
   - component: {fileID: 8372025552183686130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0857d9d4aa20894b9df3d5f84c8d22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateMachine
+  housePrefab: {fileID: 1033370624734968752, guid: 9c4af79673cb76144b5af9896ba58846, type: 3}
+  humanPrefab: {fileID: 4377476251183262390}
   agent: {fileID: 0}
 --- !u!54 &8372025552183686130
 Rigidbody:
@@ -85,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 566461392602520914}
   - component: {fileID: 1029353199668935135}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +122,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -141,7 +143,7 @@ GameObject:
   - component: {fileID: 8515497828262764203}
   - component: {fileID: 2661934564793385009}
   - component: {fileID: 3135174177939054358}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

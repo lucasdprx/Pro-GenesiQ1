@@ -45,7 +45,7 @@ public class SelectorAbility : Ability
             decalProjector.transform.SetParent(target.transform);
             decalProjector.transform.localPosition = Vector3.zero;
             decalProjector.transform.localRotation = Quaternion.identity;
-            decalProjector.size = new Vector3(2, 2, 2);
+            decalProjector.size = new Vector3(4, 4, 4);
         }
         currentSelected = target;
     }

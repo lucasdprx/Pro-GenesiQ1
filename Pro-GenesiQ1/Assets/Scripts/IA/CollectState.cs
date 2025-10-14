@@ -23,7 +23,7 @@ public class CollectState : IState
 
     public void OnUpdate()
     {
-        if (Vector3.Distance(agent.position, target.position) < 1.5f)
+        if (Vector3.Distance(agent.position, target.position) < 2f)
         {
             agent.linearVelocity = Vector3.zero + new Vector3(0, agent.linearVelocity.y, 0);
             collectTime += Time.deltaTime;

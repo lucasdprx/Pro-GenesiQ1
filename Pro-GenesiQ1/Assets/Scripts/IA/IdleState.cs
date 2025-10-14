@@ -30,12 +30,12 @@ public class IdleState : IState
             {
                 idleTime = 0f;
                 target = agent.transform.position + GetRandomVector(30f);
-                agent.transform.LookAt(target);
-                agent.transform.localEulerAngles = new Vector3(0, agent.transform.localEulerAngles.y, 0);
             }
         }
         else
         {
+            agent.transform.LookAt(target);
+            agent.transform.localEulerAngles = new Vector3(0, agent.transform.localEulerAngles.y, 0);
             agent.linearVelocity = agent.transform.forward * speed + new Vector3(0, agent.linearVelocity.y, 0);
         }
             
